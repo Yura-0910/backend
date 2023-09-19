@@ -17,4 +17,12 @@ class FrequencyOfCharApplicationTests {
 		assertNotNull(inputController);
 		assertNotNull(calculationService);
 	}
+
+	@Test
+	void inputDataContainsOnlyLetters(){
+		String inputData = "HelloWorld5";
+		String expectedResult = "Обрабатываемая строка должна содержать только буквы";
+
+		assertThat(calculationService.initialCheckAllCharIsLetter(inputData), is(expectedResult));
+	}
 }
