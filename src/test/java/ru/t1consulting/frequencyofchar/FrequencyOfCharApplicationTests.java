@@ -25,4 +25,12 @@ class FrequencyOfCharApplicationTests {
 
 		assertThat(calculationService.initialCheckAllCharIsLetter(inputData), is(expectedResult));
 	}
+
+	@Test
+	void checkThatCharacterFrequencyIsCorrect(){
+		String inputData = "aaaaabcccc";
+		String expectedResult = "\"a\":5, \"c\":4, \"b\":1";
+
+		assertThat(calculationService.initialCheckAllCharIsLetter(inputData), is(expectedResult));
+	}
 }
