@@ -18,7 +18,7 @@ public class InputController {
 
     @PutMapping("/count-chars")
     public String getDataFromRequest(@RequestBody String dataFromRequest){
-        return calculationService.process(dataFromRequest);
+        return calculationService.initialCheckAllCharIsLetter(dataFromRequest);
     }
 }
 

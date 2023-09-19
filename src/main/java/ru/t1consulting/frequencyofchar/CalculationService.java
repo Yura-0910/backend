@@ -10,12 +10,28 @@ import java.util.stream.Collectors;
 @Service
 public class CalculationService {
 
-    public String process(String inputString){
+    public String initialCheckAllCharIsLetter(String dataFromRequest){
+        String processingResult = "";
+        boolean allCharsIsLetter = true;
+
+        char[] allCharsSeparately = dataFromRequest.toLowerCase().toCharArray();
+        for(char currentChar: allCharsSeparately){
+            if (!Character.isLetter(currentChar)){
+                allCharsIsLetter = false;
+                processingResult = "Обрабатываемая строка должна содержать только буквы";
+            }
+        }
+        if(allCharsIsLetter){
+            processingResult = countingFrequencyOfChars(allCharsSeparately);
+        }
+        return processingResult;
+    }
+
+    public String countingFrequencyOfChars(char[] allCharsSeparately){
         Map<Character, Integer> mapWithCharFrequency = new HashMap<>();
         Map<Character, Integer> sortingResult;
         String processingResult;
 
-        char[] allCharsSeparately = inputString.toLowerCase().toCharArray();
         for(char currentChar: allCharsSeparately){
             if(!mapWithCharFrequency.containsKey(currentChar)){
                 addCurrentCharToMap(mapWithCharFrequency, currentChar);
