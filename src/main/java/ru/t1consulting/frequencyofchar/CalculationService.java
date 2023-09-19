@@ -14,7 +14,7 @@ public class CalculationService {
         String processingResult = "";
         boolean allCharsIsLetter = true;
 
-        char[] allCharsSeparately = dataFromRequest.toLowerCase().toCharArray();
+        char[] allCharsSeparately = dataFromRequest.trim().toLowerCase().toCharArray();
         for(char currentChar: allCharsSeparately){
             if (!Character.isLetter(currentChar)){
                 allCharsIsLetter = false;
