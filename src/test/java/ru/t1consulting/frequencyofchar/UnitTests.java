@@ -8,7 +8,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
 
 @SpringBootTest
-class FrequencyOfCharApplicationTests {
+class UnitTests {
 	@Autowired private InputController inputController;
 	@Autowired private CalculationService calculationService;
 
