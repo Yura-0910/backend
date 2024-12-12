@@ -26,3 +26,20 @@ CREATE TABLE PUBLIC.TASKS
     author_id_fk   integer REFERENCES PUBLIC.USERS (user_id_pk),
     executor_id_fk integer REFERENCES PUBLIC.USERS (user_id_pk)
 );
+
+/*
+Вспомогательный запрос для просмотра задач
+
+SELECT t.task_id_pk,
+       t."header",
+       t.description,
+       s.status,
+       p.priority,
+       u.fio as author,
+       e.fio as executor
+FROM public.tasks t
+         inner join public.statuses s on t.status_id_fk = s.status_id_pk
+         inner join public.priorities p on t.priority_id_fk = p.priority_id_pk
+         inner join public.users u on t.author_id_fk = u.user_id_pk
+         inner join public.users e on t.executor_id_fk = e.user_id_pk;
+ */
