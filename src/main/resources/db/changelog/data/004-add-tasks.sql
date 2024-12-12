@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset MazurovY:3
+--changeset MazurovY:4
 
 --For the case when the "id" is generated automatically via Sequence = "последовательность"
 /* ... */
@@ -15,7 +15,7 @@ VALUES ('header1', 'description1',
 
 INSERT INTO PUBLIC.TASKS
 (header, description, status_id_fk, priority_id_fk, author_id_fk, executor_id_fk)
-VALUES ('header1', 'description1',
+VALUES ('header2', 'description2',
         (select s.status_id_pk from PUBLIC.STATUSES s where s.status like '%в процессе%'),
         (select p.priority_id_pk from PUBLIC.PRIORITIES p where p.priority like '%средний%'),
         (select u.user_id_pk from PUBLIC.USERS u where u.fio like '%fio1%'),
