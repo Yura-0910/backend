@@ -11,4 +11,3 @@ public class TaskMngSystemApplication {
 	}
 
 }
-//TODO написать Select на выборку данных из таблицы task и comments
