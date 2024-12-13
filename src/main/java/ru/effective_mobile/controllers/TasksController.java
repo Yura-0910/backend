@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.effective_mobile.dto.EditTaskDto;
 import ru.effective_mobile.dto.TaskDto;
 import ru.effective_mobile.services.TasksService;
 
@@ -13,13 +14,22 @@ import ru.effective_mobile.services.TasksService;
 @RequestMapping("/api")
 @AllArgsConstructor
 public class TasksController {
+
   private TasksService tasksService;
 
   /**
-   * Создание задачи
+   * Создание новой задачи
    */
   @PostMapping("/add")
   public ResponseEntity<String> addTask(@RequestBody TaskDto taskDTO) {
     return tasksService.addTask(taskDTO);
+  }
+
+  /**
+   * Пользователь редактирует свою задачу
+   */
+  @PostMapping("/edit")
+  public ResponseEntity<String> editTask(@RequestBody EditTaskDto editTaskDto) {
+    return tasksService.editTask(editTaskDto);
   }
 }
