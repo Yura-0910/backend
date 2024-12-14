@@ -14,7 +14,7 @@ public class StatusEditService {
   private final TasksRepository tasksRepository;
 
   /**
-   * Владелец задачи меняет статус задачи
+   * Владелец задачи или исполнитель задачи:: меняет статус своей задачи
    */
   public ResponseEntity<String> statusEdit(EditStatusDto editStatusDto) {
     Tasks task = tasksRepository.findById(editStatusDto.getTaskId()).orElse(null);
@@ -23,10 +23,11 @@ public class StatusEditService {
           HttpStatus.NOT_FOUND);
     }
 
-    //Проверяем, что менять статус будем только у своей задачи
-    if (editStatusDto.getSenderId() != task.getAuthorId()) {
-      return new ResponseEntity<>("Вы пытаетесь поменять статус не у своей задачи",
-          HttpStatus.FORBIDDEN);
+    //Проверяем, что менять статус задачи может только владелец задачи или исполнитель задачи
+    if ((editStatusDto.getSenderId() != task.getAuthorId()) &&
+        (editStatusDto.getSenderId() != task.getExecutorId())) {
+      return new ResponseEntity<>("Менять статус задачи может только владелец задачи или "
+          + "исполнитель задачи", HttpStatus.FORBIDDEN);
     }
 
     //Меняем статус своей задачи

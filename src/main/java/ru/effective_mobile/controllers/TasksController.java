@@ -37,7 +37,7 @@ public class TasksController {
   }
 
   /**
-   * Владелец задачи меняет статус задачи
+   * Владелец задачи или исполнитель задачи:: меняет статус своей задачи
    */
   @PostMapping("/editStatus")
   public ResponseEntity<String> statusEdit(@RequestBody EditStatusDto editStatusDto) {
