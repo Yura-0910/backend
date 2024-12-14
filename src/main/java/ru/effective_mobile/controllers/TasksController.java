@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.effective_mobile.dto.EditExecutorDto;
 import ru.effective_mobile.dto.EditStatusDto;
 import ru.effective_mobile.dto.EditTaskDto;
 import ru.effective_mobile.dto.TaskDto;
+import ru.effective_mobile.services.ExecutorEditService;
 import ru.effective_mobile.services.StatusEditService;
 import ru.effective_mobile.services.TasksService;
 
@@ -19,6 +21,7 @@ public class TasksController {
 
   private TasksService tasksService;
   private StatusEditService statusEditService;
+  private ExecutorEditService executorEditService;
 
   /**
    * Создание новой задачи
@@ -42,5 +45,13 @@ public class TasksController {
   @PostMapping("/editStatus")
   public ResponseEntity<String> statusEdit(@RequestBody EditStatusDto editStatusDto) {
     return statusEditService.statusEdit(editStatusDto);
+  }
+
+  /**
+   * Владелец задачи может менять исполнителя задачи
+   */
+  @PostMapping("/editExecutor")
+  public ResponseEntity<String> editExecutor(@RequestBody EditExecutorDto editExecutorDto) {
+    return executorEditService.editExecutor(editExecutorDto);
   }
 }

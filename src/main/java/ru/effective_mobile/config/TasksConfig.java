@@ -17,6 +17,7 @@ public class TasksConfig {
             .requestMatchers(new AntPathRequestMatcher("/api/add")).permitAll()
             .requestMatchers(new AntPathRequestMatcher("/api/edit")).permitAll()
             .requestMatchers(new AntPathRequestMatcher("/api/editStatus")).permitAll()
+            .requestMatchers(new AntPathRequestMatcher("/api/editExecutor")).permitAll()
             .anyRequest().authenticated());
     //Для доступа к H2-Console
     http.csrf(csrf -> csrf.disable());
