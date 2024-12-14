@@ -20,19 +20,14 @@ public class TasksService {
    */
   public ResponseEntity<String> addTask(TaskDto taskDTO) {
     Tasks task = new Tasks();
-    if (taskDTO.getTaskId() != 0) {
-      task.setTaskId(taskDTO.getTaskId());
-    }
-    task.setHeader(taskDTO.getHeader());
-    task.setDescription(taskDTO.getDescription());
-    task.setStatusId(taskDTO.getStatusId());
-    task.setPriorityId(taskDTO.getPriorityId());
-    task.setAuthorId(taskDTO.getAuthorId());
-    task.setExecutorId(taskDTO.getExecutorId());
 
+    //Заполняем поля у Task
+    task = setValuesForFieldsOfTask (task, taskDTO);
+
+    //Сохраняем Task в БД
     task = tasksRepository.save(task);
 
-    return new ResponseEntity<>("Задача успешно создана, id = " + task.getTaskId(),
+    return new ResponseEntity<>("Задача успешно создана:: id = " + task.getTaskId(),
         HttpStatus.CREATED);
   }
 
