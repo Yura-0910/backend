@@ -14,6 +14,7 @@ import ru.effective_mobile.db.entity.Tasks;
 import ru.effective_mobile.dto.EditExecutorDto;
 import ru.effective_mobile.dto.EditStatusDto;
 import ru.effective_mobile.dto.EditTaskDto;
+import ru.effective_mobile.dto.TaskAndCommentsDto;
 import ru.effective_mobile.dto.TaskDto;
 import ru.effective_mobile.services.ExecutorEditService;
 import ru.effective_mobile.services.StatusEditService;
@@ -69,7 +70,7 @@ public class TasksController {
    * @return список со всеми задачами конкретного автора или исполнителя
    */
   @GetMapping("/allTasks/{userId}")
-  public List<Tasks> allTasks(@PathVariable long userId,
+  public List<TaskAndCommentsDto> allTasks(@PathVariable long userId,
       @RequestParam String userType) {
     return tasksViewService.allTasks(userId, userType);
   }
