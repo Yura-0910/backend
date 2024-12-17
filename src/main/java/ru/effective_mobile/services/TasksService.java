@@ -35,7 +35,7 @@ public class TasksService {
    * Пользователь редактирует свою задачу
    */
   public ResponseEntity<String> editTask(EditTaskDto editTaskDto) {
-    Tasks task = tasksRepository.findById(editTaskDto.getTaskId()).orElse(null);
+    Tasks task = tasksRepository.findByTaskId(editTaskDto.getTaskId()).orElse(null);
     if (task == null) {
       return new ResponseEntity<>("Задача не найдена:: нечего редактировать",
           HttpStatus.NOT_FOUND);

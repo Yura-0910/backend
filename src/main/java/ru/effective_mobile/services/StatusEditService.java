@@ -17,7 +17,7 @@ public class StatusEditService {
    * Владелец задачи или исполнитель задачи:: меняет статус своей задачи
    */
   public ResponseEntity<String> statusEdit(EditStatusDto editStatusDto) {
-    Tasks task = tasksRepository.findById(editStatusDto.getTaskId()).orElse(null);
+    Tasks task = tasksRepository.findByTaskId(editStatusDto.getTaskId()).orElse(null);
     if (task == null) {
       return new ResponseEntity<>("Задача не найдена:: нечего менять",
           HttpStatus.NOT_FOUND);

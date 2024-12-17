@@ -20,7 +20,7 @@ public class CommentsService {
    * Добавляем комментарий к любой задаче
    */
   public ResponseEntity<String> addComment(CommentDto commentDto) {
-    Tasks task = tasksRepository.findById(commentDto.getTaskId()).orElse(null);
+    Tasks task = tasksRepository.findByTaskId(commentDto.getTaskId()).orElse(null);
     if (task == null) {
       return new ResponseEntity<>("Задачу не удалось найти. Комментировать нечего.",
           HttpStatus.NOT_FOUND);

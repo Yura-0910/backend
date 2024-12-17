@@ -17,7 +17,7 @@ public class ExecutorEditService {
    * Владелец задачи может менять исполнителя задачи
    */
   public ResponseEntity<String> editExecutor(EditExecutorDto editExecutorDto) {
-    Tasks task = tasksRepository.findById(editExecutorDto.getTaskId()).orElse(null);
+    Tasks task = tasksRepository.findByTaskId(editExecutorDto.getTaskId()).orElse(null);
     if (task == null) {
       return new ResponseEntity<>("Задача не найдена:: нечего менять",
           HttpStatus.NOT_FOUND);
