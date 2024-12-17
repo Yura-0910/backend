@@ -2,6 +2,7 @@ package ru.effective_mobile.controllers;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +15,13 @@ import ru.effective_mobile.db.entity.Tasks;
 import ru.effective_mobile.dto.EditExecutorDto;
 import ru.effective_mobile.dto.EditStatusDto;
 import ru.effective_mobile.dto.EditTaskDto;
-import ru.effective_mobile.dto.TaskAndCommentsDto;
 import ru.effective_mobile.dto.TaskDto;
 import ru.effective_mobile.services.ExecutorEditService;
 import ru.effective_mobile.services.StatusEditService;
 import ru.effective_mobile.services.TasksService;
 import ru.effective_mobile.services.TasksViewService;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 
 @RestController
 @RequestMapping("/api")
@@ -64,14 +66,27 @@ public class TasksController {
   }
 
   /**
-   * Просмотр всех задач конкретно автора или конкретного исполнителя
-   * @param userId id автора или id исполнителя
-   * @param userType тип пользователя:: автор\author или исполнитель\executor
+   * Просмотр всех задач (с комментариями) конкретно автора или конкретного исполнителя
+   *
+   * @param userId    id автора или id исполнителя
+   * @param userType  тип пользователя:: автор\author или исполнитель\executor
+   * @param page      номер страницы (с нуля): используется для пегинации
+   * @param size      количество элементов на странице: используется для пегинации
+   * @param direction направление сортировки
    * @return список со всеми задачами конкретного автора или исполнителя
    */
   @GetMapping("/allTasks/{userId}")
-  public List<TaskAndCommentsDto> allTasks(@PathVariable long userId,
-      @RequestParam String userType) {
-    return tasksViewService.allTasks(userId, userType);
+  public List<Tasks> allTasks(@PathVariable long userId,
+      @RequestParam(defaultValue = "author") String userType,
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int size,
+      @RequestParam(defaultValue = "asc") String direction) {
+    Pageable pageable = null;
+    if (direction.contains("asc")) {
+      pageable = PageRequest.of(page, size, Sort.by("taskId"));
+    } else {
+      pageable = PageRequest.of(page, size, Sort.by("taskId").descending());
+    }
+    return tasksViewService.allTasks(userId, userType, pageable);
   }
 }
