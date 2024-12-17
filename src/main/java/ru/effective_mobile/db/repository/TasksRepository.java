@@ -13,4 +13,5 @@ public interface TasksRepository extends PagingAndSortingRepository<Tasks, Long>
    public List<Tasks> findAllByExecutorId(long executorId, Pageable pageable);
    public Optional<Tasks> findByTaskId(long taskId);
    public  Tasks save(Tasks task);
+   public void deleteTasksByTaskId(long taskId);
 }

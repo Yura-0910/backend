@@ -4,6 +4,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.effective_mobile.db.entity.Tasks;
+import ru.effective_mobile.dto.DeleteTaskDto;
 import ru.effective_mobile.dto.EditExecutorDto;
 import ru.effective_mobile.dto.EditStatusDto;
 import ru.effective_mobile.dto.EditTaskDto;
 import ru.effective_mobile.dto.TaskDto;
 import ru.effective_mobile.services.ExecutorEditService;
 import ru.effective_mobile.services.StatusEditService;
+import ru.effective_mobile.services.TasksDeleteService;
 import ru.effective_mobile.services.TasksService;
 import ru.effective_mobile.services.TasksViewService;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +35,7 @@ public class TasksController {
   private StatusEditService statusEditService;
   private ExecutorEditService executorEditService;
   private TasksViewService tasksViewService;
+  private TasksDeleteService tasksDeleteService;
 
   /**
    * Создание новой задачи
@@ -88,5 +92,13 @@ public class TasksController {
       pageable = PageRequest.of(page, size, Sort.by("taskId").descending());
     }
     return tasksViewService.allTasks(userId, userType, pageable);
+  }
+
+  /**
+   * Автор задачи удаляет свою задачу
+   */
+  @DeleteMapping("/delete")
+  public ResponseEntity<String> deleteTask(@RequestBody DeleteTaskDto deleteTaskDto) {
+    return tasksDeleteService.deleteTask(deleteTaskDto);
   }
 }
