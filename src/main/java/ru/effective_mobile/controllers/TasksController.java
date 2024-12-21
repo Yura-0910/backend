@@ -1,5 +1,6 @@
 package ru.effective_mobile.controllers;
 
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -41,7 +42,7 @@ public class TasksController {
    * Создание новой задачи
    */
   @PostMapping("/add")
-  public ResponseEntity<String> addTask(@RequestBody TaskDto taskDTO) {
+  public ResponseEntity<String> addTask(@Valid @RequestBody TaskDto taskDTO) {
     return tasksService.addTask(taskDTO);
   }
 
