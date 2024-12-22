@@ -21,6 +21,8 @@ public class TasksConfig {
             .requestMatchers(new AntPathRequestMatcher("/api/addComment")).permitAll()
             .requestMatchers(new AntPathRequestMatcher("/api/allTasks/**")).permitAll()
             .requestMatchers(new AntPathRequestMatcher("/api/delete")).permitAll()
+            .requestMatchers(new AntPathRequestMatcher("/v3/**")).permitAll()
+            .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
             .anyRequest().authenticated());
     //Для доступа к H2-Console
     http.csrf(csrf -> csrf.disable());
