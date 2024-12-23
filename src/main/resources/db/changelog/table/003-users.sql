@@ -18,5 +18,6 @@ CREATE TABLE PUBLIC.USERS
     user_id_pk BIGSERIAL PRIMARY KEY,
     fio        text,
     email      text,
-    password   text
+    password   text,
+    role_id_fk integer REFERENCES PUBLIC.ROLES(role_id_pk)
 )
