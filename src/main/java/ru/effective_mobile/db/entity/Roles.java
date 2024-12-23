@@ -11,25 +11,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "users")
+@Table(name = "roles")
 @NoArgsConstructor
 @Getter
 @Setter
-public class Users {
+public class Roles {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "user_id_pk")
-  private long userId;
-
-  @Column(name = "fio")
-  private String fio;
-
-  @Column(name = "email")
-  private String email;
-
-  @Column(name = "password")
-  private String password;
-
-  @Column(name = "role_id_fk")
+  @Column(name = "role_id_pk")
   private long roleId;
+
+  @Column(name = "role")
+  String role;
 }
