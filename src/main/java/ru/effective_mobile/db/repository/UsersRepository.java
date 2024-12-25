@@ -8,4 +8,5 @@ import ru.effective_mobile.db.entity.Users;
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Long> {
  boolean existsByEmail(String email);
+ Users findByEmail(String email);
 }
