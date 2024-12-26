@@ -10,6 +10,7 @@ import ru.effective_mobile.db.entity.Users;
 import ru.effective_mobile.db.repository.RolesRepository;
 import ru.effective_mobile.db.repository.UsersRepository;
 import ru.effective_mobile.dto.SignUpDto;
+import ru.effective_mobile.jwt.JwtService;
 
 @Service
 @AllArgsConstructor
