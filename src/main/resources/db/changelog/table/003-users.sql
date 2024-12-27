@@ -19,5 +19,11 @@ CREATE TABLE PUBLIC.USERS
     fio        text,
     email      text,
     password   text,
-    role_id_fk integer REFERENCES PUBLIC.ROLES(role_id_pk)
+    role_id_fk integer REFERENCES PUBLIC.ROLES (role_id_pk)
 )
+/*
+ Вспомогательный запрос для просмотра пользователей
+
+ select * from users u inner join public.roles r on u.role_id_fk = r.role_id_pk
+ */
+
